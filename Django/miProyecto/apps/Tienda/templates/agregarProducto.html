@@ -1,0 +1,131 @@
+{% extends './baseTodos.html' %}
+
+{% load static %}
+
+{% block body %}
+    <h1>ADMIN VIEW - AGREGAR PRODUCTOS</h1>
+
+    <div class="container">
+        <form id="formularioAgregarProducto" action="/agregarProductoForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="txtSku">SKU:</label>
+                    <input name="txtSku" id="txtSku" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-8">
+                    <label for="txtNombre">Nombre:</label>
+                    <input name="txtNombre" id="txtNombre" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="txtStock">Stock:</label>
+                    <input name="txtStock" id="txtStock" type="text" class="form-control">
+                </div>
+
+
+                <div class="col-md-4">
+                    <label for="txtPrecio">Precio:</label>
+                    <input name="txtPrecio" id="txtPrecio" type="number" class="form-control">
+                </div>
+
+
+                <div class="col-md-4">
+                    <label for="fechaVencimientoSel">Fecha de vencimiento:</label>
+                    <input type="date" name="fechaVencimientoSel" id="fechaVencimientoSel" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="txtImg">Imagen URL:</label>
+                    <input name="txtImg" id="txtImg" type="file" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-success mt-5 w-100">Agregar Producto</button>
+        </form>
+    </div>
+
+
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">SKU</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Fecha Vencimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for p in prod %}
+              <tr>
+                <th scope="row">{{p.sku}}</th>
+                <td><img src="{{p.image_url.url}}" alt="" height="100"></td>
+                <td>{{p.nombre}}</td>
+                <td>{{p.descripcion}}</td>
+                <td>{{p.stock}}</td>
+                <td>{{p.precio}}</td>
+                <td>{{p.fecha_vencimiento}}</td>
+                <td>{{p.categoria_id}}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+
+
+    <h1>EDITAR PRODUCTOS</h1>
+
+    <div class="container">
+        <form action="/editarProductoForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="txtSku">SKU:</label>
+                    <input readonly value="{{prod.sku}}" name="txtSku" id="txtSku" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-8">
+                    <label for="txtNombre">Nombre:</label>
+                    <input value="{{prod.nombre}}" name="txtNombre" id="txtNombre" type="text" class="form-control">
+                </div>
+
+
+                <div class="col-md-4">
+                    <label for="txtStock">Stock:</label>
+                    <input value="{{prod.stock}}" name="txtStock" id="txtStock" type="text" class="form-control">
+                </div>
+
+
+                <div class="col-md-4">
+                    <label for="txtPrecio">Precio:</label>
+                    <input value="{{prod.precio}}" name="txtPrecio" id="txtPrecio" type="number" class="form-control">
+                </div>
+
+
+                <div class="col-md-4">
+                    <label for="fechaVencimientoSel">Fecha de vencimiento:</label>
+                    <input value="{{prod.fecha_vencimiento|date:'Y-m-d'}}" type="date" name="fechaVencimientoSel" id="fechaVencimientoSel" type="text" class="form-control">
+                </div>
+                        {% for c in cate %}
+                        <option value="{{c.categoria_id}}" {% if categoriaId == c.categoria_id %} selected {% endif %}>{{c.nombre}}</option>
+                        {% endfor %}
+                      </select>  
+                </div>
+
+
+                <div class="col-md-6">
+                    <label for="txtImg">Imagen URL:</label>
+                    <img src="{{prod.image_url.url}}" alt="" height="100">
+                    <input  name="txtImg" id="txtImg" type="file" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-success mt-5 w-100">CONFIRMAR EDICION</button>
+        </form>
+    </div>
+
+    {% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/functionAgregarProducto.js' %}"></script>
+{% endblock %}

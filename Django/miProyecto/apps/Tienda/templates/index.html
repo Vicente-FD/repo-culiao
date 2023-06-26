@@ -1,0 +1,128 @@
+{% extends './baseTodos.html' %}
+{% load static %}
+
+
+{% block body %}
+    <main>
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'img/carrousel.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/carrousel2.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/carrousel.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </main>
+    <!----- FIN HEADER ----->
+    <!----- CARDS ----->
+    <div class="container" >
+      <h3 class="text-center mt-4">En nuestra tienda encontrarás</h3>
+      <div class="row justify-content-center">
+        <div class="card mr-1 mb-1" id="idcard" style="width: 18rem">
+          <img src="{% static 'img/catalogoPerro.webp' %}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Todo para tu perrit@</h5>
+          </div>
+        </div>
+    
+        <div class="card mr-1 mb-1" id="idcard"  style="width: 18rem">
+          <img src="{% static 'img/catalogoGatos.webp'%}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Todo para tu gatit@</h5>
+          </div>
+        </div>
+    
+        <div class="card mr-1 mb-1" id="idcard" style="width: 18rem">
+          <img src="{% static 'img/catalogoExoticos.webp'%}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Todo para tu exótic@</h5>
+          </div>
+        </div>
+    
+        <div class="card mr-1 mb-1" id="idcard" style="width: 18rem">
+          <img src="{% static 'img/veterinaria.webp'%}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Veterinaria</h5>
+          </div>
+        </div>
+    
+        <div class="card mr-1 mb-1" id="idcard" style="width: 18rem">
+          <img src="{% static 'img/peluqueria.webp'%}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Peluquería</h5>
+          </div>
+        </div>
+    
+        <div class="card mr-1 mb-1" id="idcard" style="width: 18rem">
+          <img src="{%static 'img/nuevo-miembro.webp'%}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title text-center">Un nuevo amig@ </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+<!-- AQUI VA UN BLOCK BODY -->
+    
+    <div class="container">
+        <div class="row mt-5">
+            <h2>Perros</h2>
+            {% for p in cate_perro %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{p.image_url.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{p.nombre}}</h5>
+                      <p class="card-text">{{p.descripcion}}</p>
+                      <a href="#" class="btn btn-primary">{{p.precio}}</a>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        
+
+        <div class="row mt-5">
+            <h2>Gatos</h2>
+            {% for p in cate_gato %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{p.image_url.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{p.nombre}}</h5>
+                      <p class="card-text">{{p.descripcion}}</p>
+                      <a href="#" class="btn btn-primary">{{p.precio}}</a>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block script %}
+<script src="{% static 'js/prueba.js' %}"></script>
+{% endblock %}
+    <!----- FIN CARDS ----->
+
+
